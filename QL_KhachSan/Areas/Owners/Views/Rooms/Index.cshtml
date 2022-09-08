@@ -1,0 +1,114 @@
+﻿@model IEnumerable<QL_KhachSan.ModelDbs.Room>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">Phòng</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+                    <div class="rs-select2--light rs-select2--md">
+                        <select class="js-select2" name="property">
+                            <option selected="selected">All Properties</option>
+                            <option value="">Option 1</option>
+                            <option value="">Option 2</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                    <div class="rs-select2--light rs-select2--sm">
+                        <select class="js-select2" name="time">
+                            <option selected="selected">Today</option>
+                            <option value="">3 Days</option>
+                            <option value="">1 Week</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                    <button class="au-btn-filter">
+                        <i class="zmdi zmdi-filter-list"></i>filters
+                    </button>
+                </div>
+                <div class="table-data__tool-right">
+                    <a asp-area="Owners" asp-controller="Rooms" asp-action="Create" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>Thêm dữ liệu
+                    </a>
+                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                        <select class="js-select2" name="type">
+                            <option selected="selected">Excel</option>
+                            <option value="">Xuất Excel</option>
+                            <option value="">Nhập Excel</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                           Tên phòng
+                        </th>
+                        <th>
+                            Trạng thái
+                        </th>
+                        <th>
+                            Mô tả
+                        </th>
+                        <th>
+                            Thuộc khách sạn
+                        </th>
+                        <th>
+                            Loại phòng
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr class="tr-shadow">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomName)
+                        </td>
+                        <td>
+                            @{ var temp = "";
+                                if (item.RoomStatus == true)
+                                    temp = "Đã được đặt";
+                                else
+                                    temp = "Còn trống";
+                             }
+                            @temp
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomDescript)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hotel.HotelName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tor.TorName)
+                        </td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa" asp-area="Owners" asp-controller="Rooms" asp-action="Edit" asp-route-id1="@item.HotelId" asp-route-id2="@item.RoomId">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </a> 
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết" asp-area="Owners" asp-controller="Rooms" asp-action="Details" asp-route-id="@item.HotelId">
+                                    <i class="zmdi zmdi-book"></i>
+                                </a>
+                                <a class="item" data-toggle="tooltip" data-placement="top" title="Xóa" asp-area="Owners" asp-controller="Rooms" asp-action="Delete" asp-route-id1="@item.HotelId" asp-route-id2="@item.RoomId">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+            }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

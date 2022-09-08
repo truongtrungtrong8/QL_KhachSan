@@ -1,0 +1,48 @@
+﻿@model QL_KhachSan.ModelDbs.Room
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Room</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="HotelId" />
+            <input type="hidden" asp-for="RoomId" />
+            <div class="form-group">
+                <label asp-for="TorId" class="control-label"></label>
+                <select asp-for="TorId" class="form-control" asp-items="ViewBag.TorId"></select>
+                <span asp-validation-for="TorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomName" class="control-label"></label>
+                <input asp-for="RoomName" class="form-control" />
+                <span asp-validation-for="RoomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomStatus" class="control-label"></label>
+                <input asp-for="RoomStatus" class="form-control" />
+                <span asp-validation-for="RoomStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomDescript" class="control-label"></label>
+                <input asp-for="RoomDescript" class="form-control" />
+                <span asp-validation-for="RoomDescript" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,282 @@
+﻿@model QL_KhachSan.ModelDbs.HotelDetail
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layout_HotelDetail.cshtml";
+}
+
+<script src="/lib/jquery/dist/jquery.js"></script>
+<script src="/js/GetName.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        getAddressHotel(@Model.hotel.ProvinceId,@Model.hotel.DistrictId, @Model.hotel.WardId, "AddressHotel");
+        getMinPrice(@Model.hotel.HotelId,null,"PriceHotel")
+    });
+</script>
+
+
+                    <!-- Header Detail -->
+                    <section class="head-detail">
+                        <div class="head-dt-cn">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h1>@Model.hotel.HotelName</h1>
+                                    <div class="start-address">
+                                        <span class="star">
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                        </span>
+                                        <address class="address" id="AddressHotel">
+                                            42 Princes Square, London W2 4AD
+                                        </address>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 text-right">
+                                    <p class="price-book">
+                                        Từ <span id="PriceHotel"></span>/đêm
+                                       
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Header Detail -->
+
+                    <!-- Detail Slide -->
+                    <section class="detail-slider">
+                        <!-- Lager Image -->
+                        <div class="slide-room-lg">
+                            <div id="slide-room-lg">
+                                <img src="~/images/@Model.hotel.HotelAvt" alt="">
+                                <img src="~/images/@Model.hotel.HotelAvt" alt="">
+                                <img src="~/images/@Model.hotel.HotelAvt" alt="">
+                                <img src="~/images/@Model.hotel.HotelAvt" alt="">
+                                <img src="~/images/@Model.hotel.HotelAvt" alt="">
+                            </div>
+                        </div>
+                        <!-- End Lager Image -->
+                        <!-- Thumnail Image -->
+                        <!-- End Thumnail Image -->
+                    </section>
+                    <!-- End Detail Slide -->
+
+                    <!-- Hotel Content One -->
+                    <section class="hotel-content detail-cn" id="hotel-content">
+                        <div class="row">                        
+                            <div class="col-lg-3 detail-sidebar">
+                                <!-- Hight Light -->
+                                <div class="hight-light">
+
+                                    <h2>Tuyệt vời</h2>
+                                    <!-- Vote Text -->
+                                    <div class="row">
+                                        <!-- Recommend -->
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-6 vote-text">
+                                            <p><span>95</span>%</p>
+                                            <small>Số lượng phản hồi</small>
+                                            <a href="#" title="">Đọc Review</a>
+
+                                        </div>
+                                        <!-- End Recommend -->
+                                        <!-- Tripadvitsor -->
+                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-6  vote-text">
+                                            <img src="images/icon-tripadvitsor.png" alt="">
+                                            <small>4.5 Rất tốt</small>
+                                            <a href="#" title="">145 Reviews</a>
+                                        </div>
+                                        <!-- End Tripadvitsor -->
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                            <hr class="hr">
+
+                                            <!-- Quote -->
+                                            <blockquote class="quote-sidebar">
+                                                <p>
+                                                    Vị trí tuyệt vời nằm sau Khách sạn Ritz trên Piccadilly. Đáng giá. Suite tôi đã đặt là tốt.<br>
+                                                    <span><b>Daniel Brown</b> - Sweden,  28/3/2013</span>
+                                                </p>
+                                            </blockquote>
+                                            <!-- End Quote -->
+                                        </div>
+                                    </div>
+                                    <!-- End Vote Text -->
+
+                                    
+
+                                </div>
+                                <!-- End Hight Light -->
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-lg-9 hl-customer-like">
+
+                                <h2>Tại sao khách hàng thích khách sạn này</h2>
+
+                                <!-- Custom link field -->
+                                <div class="customer-like">
+                                    <span class="cs-like-label">
+                                        Phương tiện giao thông gần nhất
+                                    </span>
+                                    <ul>
+                                        <li>Shepherd's Bush (Central) Tube Station (0.5 Km / 6 min walk)</li>
+                                    </ul>
+                                </div>
+                                <!-- End Custom link field -->
+
+                                <!-- Custom link field -->
+                                <div class="customer-like">
+                                    <span class="cs-like-label">
+                                        Khoảng cách đến sân bay
+                                    </span>
+                                    <ul>
+                                        <li> London Heathrow Airport (17.0 Km)</li>
+                                        <li>London City Airport (18.3 Km)</li>
+                                    </ul>
+                                </div>
+                                <!-- End Custom link field -->
+
+                                <!-- Custom link field -->
+                                <div class="customer-like">
+                                    <span class="cs-like-label">
+                                        Phương tiện di chuyển gần nhất
+                                    </span>
+                                    <ul>
+                                        <li>Thoải mái và sạch sẽ, Nhân viên thân thiện, Đáng giá tiền</li>
+                                    </ul>
+                                </div>
+                                <!-- End Custom link field -->
+
+                                <!-- Custom link field -->
+                                <div class="customer-like">
+                                    <span class="cs-like-label">
+                                        Top attractions in the area
+                                    </span>
+                                    <ul>
+                                        <li>Westfield London (0.9 Km / 11 min walk)</li>
+                                        <li>Natural History Museum (2.6 Km)</li>
+                                        <li>Victoria and Albert Museum (2.9 Km)</li>
+                                        <li>Hyde Park (3.0 Km)</li>
+                                    </ul>
+                                </div>
+                                <!-- End Custom link field -->
+
+                            </div>
+                            <!-- End Description -->
+                        </div>
+
+                    </section>
+                    <!-- End Hotel Content One -->
+
+                    <!-- Check Rates-->
+                    <section class="check-rates detail-cn" id="check-rates">
+                        <div class="row">
+                            <div class="col-lg-3 detail-sidebar">
+                                <!-- chổ nhúng map-->
+                            </div>
+                            <div class="col-lg-9 check-rates-cn">
+
+                                <!-- Form Check Hotel Availability -->
+                                <div class="check-rates-form">
+                                    <h3>Nhập thông tin để tìm kiếm phòng</h3>
+                                    <div class="form-search clearfix">
+                                        <div class="form-field field-date">
+                                            <input type="text" class="field-input calendar-input" placeholder="Check in">
+                                        </div>
+                                        <div class="form-field field-date">
+                                            <input type="text" class="field-input calendar-input" placeholder="Check out">
+                                        </div>
+                                        <div class="form-field field-select">
+                                            <div class="select">
+                                                <span>Guest</span>
+                                                <select>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-submit">
+                                            <button type="submit" class="awe-btn awe-btn-4 arrow-right awe-btn-medium">Tìm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Form Check Hotel Availability -->
+                                <!-- Hotel Availability -->
+                                <div class="hl-availability">
+                                    <div class="table-responsive">
+                                        <table class="table table-availability">
+                                            <tr>
+                                                <th>Loại phòng</th>
+                                                <th>Giá <span>(/đêm)</span></th>
+                                                <th></th>
+                                            </tr>
+
+                                            @foreach (var (item, index) in Model.room.Select((v, i) => (v, i)))
+                                            {
+                                                if(item.RoomStatus == false){
+                                                    <tr>
+                                                    <td class="avai-td-text">
+                                                        <figure>
+                                                            @{
+                                                                var imgTemp = Model.roomimage.Where(r=>r.RoomId == item.RoomId).Select(r=>r.RoomimageAvt).FirstOrDefault();
+                                                            }
+                                                            <img src="~/images/@imgTemp" alt="">    
+                                                        </figure>
+                                                        <h3>@item.RoomName</h3>
+                                                        <p>@item.RoomDescript</p>
+                                                        <a href="#">Xem thêm</a>
+                                                    </td>
+                                                    <td class="avai-td-price">
+                                                        <span class="price">@Html.FormatValue(item.Tor.TorPrice, "{0:#,###}")đ<small>/đêm</small></span>
+                                                    </td>
+                                                    <td class="avai-td-book">
+                                                        <script type="text/javascript">
+                                                            function GetCustomer(id, roomid){
+                                                                if (id =="9999") {
+                                                                    alert("Vui lòng đăng nhập để đặt phòng!");
+                                                                    location.href = "/Home/Login";
+                                                                }
+                                                                $.getJSON("/Home/GetCustomer?id=" + id, function(response) {
+                                                                    if (response != null) {
+                                                                        document.getElementById("guestname").value = response.customerName;
+                                                                        document.getElementById("guestemail").value = response.customerEmail;
+                                                                        document.getElementById("guestelephone").value = response.customerPhone;
+                                                                        document.getElementById("roomid").value = roomid;
+                                                                    }
+                                                                    
+                                                                })
+                                                            }
+                                                        </script>
+                                                        @{
+                                                            var temp = "";
+                                                            if(Context.Session.GetString("Cus_ID") == null){
+                                                                temp = "9999";
+                                                            }
+                                                            else 
+                                                                temp = Context.Session.GetString("Cus_ID");
+                                                        }
+                                                        <input type="button" class="btn btn-danger m-1"  data-toggle="modal" data-target="#exampleModal" value="Book" onclick="GetCustomer(@temp, @item.RoomId)">
+                                                        @await Html.PartialAsync("_BookPopup")
+                                                    </td>
+                                                </tr>
+                                                }
+                                            }
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- Hotel Availability -->
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                   
+                    <!-- End Check Rates -->
+
+
+                   
+                    

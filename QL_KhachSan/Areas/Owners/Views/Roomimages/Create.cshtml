@@ -1,0 +1,99 @@
+﻿@model QL_KhachSan.ModelDbs.Roomimage
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/GetRoom.js"></script>
+<script>
+function chooseFile(fileInput) {
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#image').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+
+}
+
+</script>
+
+<div class="card">
+        <div class="card-header">
+            <strong>Thêm hình ảnh cho phòng</strong>
+        </div>
+        <div class="card-body card-block">
+            <form enctype="multipart/form-data" asp-action="Create" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label asp-for="HotelId" class="control-label">Tên khách sạn</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <select class ="form-control" id="ListHotel"></select>
+                        <input asp-for="HotelId" class ="form-control" id="HotelId" />
+                    </div>
+                </div>
+                
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label asp-for="RoomId" class="control-label">Tên phòng</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <select  class ="form-control" id="ListRoom"></select>
+                        <input asp-for="RoomId" class ="form-control" id="RoomId" />
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label asp-for="RoomimageAvt" class="control-label">Hình đại diện</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <img src="~/images/MacDinh.jpg" alt="" id="image" width="200" height="200" />
+                        <input type="file" name="myfile" onchange="chooseFile(this)" accept="image/gif, image/jpeg, image/png"/>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-2">
+                        <label asp-for="RoomimageI1" class="control-label">Hình chi tiết</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <input type="file" name="myfiles" multiple accept="image/gif, image/jpeg, image/png"/>
+                    </div>
+                </div>
+
+                @*<div class="row form-group">
+                    <div class="col col-md-2">
+                        <label asp-for="RoomimageI2" class="control-label">Hình minh họa</label>
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <img src="~/images/MacDinh.jpg" alt="" id="image3" width="200" height="200" />
+                        <input type="file" name="myfile3" onchange="chooseFile3(this)" accept="image/gif, image/jpeg, image/png"/>
+                    </div>
+                </div>*@
+
+                <div class="card-footer">
+                    <button type="submit" value="Create" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Thêm mới
+                     </button>
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại</a>
+</div>
+

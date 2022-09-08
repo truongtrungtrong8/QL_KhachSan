@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = null;
+}
+	<link rel="stylesheet" href="~/leaflet/css/leaflet.css"> 
+    <link rel="stylesheet" href="~/leaflet/css/leaflet.draw.css"> <!--liên kết css của leaflet-->
+	<script src="~/leaflet/js/leaflet.js"></script>	
+    <script src="~/leaflet/js/leaflet.draw.js"></script>	<!--liên kết js của leaflet-->
+	<script src="~/lib/jquery/dist/jquery.js"></script>
+	<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    #map {
+        height: 500px;
+        width: 500px;
+    }
+</style>
+<div id="map" style="width:100%;height:100%"></div>
+<script type="text/javascript" defer>
+
+	//Khai báo đối tượng chính chứa bản đồ gắn vào thẻ div tên "map"
+	var mapObject = L.map("map", {center: [10.038035, 105.777698], zoom: 9});
+	//hoặc: var mapObject = L.map('map').setView([10.030249, 105.772097], 17);
+
+	//Bản đồ nền dạng Raster
+	L.tileLayer(
+		"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", 
+		{attribution: '&copy; <a href="http://' + 
+		'www.openstreetmap.org/copyright">OpenStreetMap</a>'}
+	).addTo(mapObject);
+	
+
+	var popup = L.popup();
+	mapObject.on("click", onMapClick);
+	function onMapClick(e) {
+		popup
+		.setLatLng(e.latlng)
+			.setContent(
+				"Bạn đã click ở (Kinh độ (lng), Vĩ độ (lat)):<br>" +
+				Math.round( e.latlng.lng * 1000000 + Number.EPSILON ) / 1000000 + ", " +
+				Math.round( e.latlng.lat * 1000000 + Number.EPSILON ) / 1000000
+			)
+		.openOn(mapObject);
+	}
+
+
+
+//Thêm điều khiển vẽ; Icon mặc nhiên trong thư mục css/images
+//https://cdnjs.com/libraries/leaflet.draw
+var drawnItems = L.featureGroup().addTo(mapObject);
+new L.Control.Draw({
+    edit: {
+        featureGroup: drawnItems,
+    },
+    draw: {
+        circle: false,
+        circlemarker: false, 		// Turns off this drawing tool
+    },
+}).addTo(mapObject);
+
+//layer để giữ đối tượng đang vẽ hoặc đang được chọn
+var layer = new L.Layer();
+
+//Tạo nút lệnh Save
+var control = L.control({ position: "topright" });
+control.onAdd = function (map) {
+    var div = L.DomUtil.create("div", "divsave");
+    div.innerHTML = '<input type="button" id="save" class="btn btn-success btn-lg" value="Save">';
+    return div;
+};
+control.addTo(mapObject);
+var qhthem = "", pxthem = "";
+//Khi vẽ thì thêm vào lớp drawnItems
+mapObject.on("draw:created", function (e) {
+    layer = e.layer;
+    layer.addTo(drawnItems);
+    var popupContent =
+        '<form>' +
+        '<input type="button" value="Submit" id="submit"><br><br>' +
+        '</form>';
+        layer.bindPopup(popupContent).openPopup();
+});
+
+
+
+drawnItems.on('popupopen', function (e) {
+    layer = e.layer;
+});
+
+
+// lưu feature vào CSDL
+$("#save").on("click", function () {
+    drawnItems.eachLayer(function(layer) {
+        var geo = layer.toGeoJSON();
+        var x = layer.toGeoJSON().geometry.coordinates[0];
+        var y = layer.toGeoJSON().geometry.coordinates[1];
+
+        location.href = "/Owners/Hotels/AddPoint?x=" + x + "&y=" + y;
+        setTimeout("window.close()", 500);
+        
+    });
+        
+});
+
+</script>
+

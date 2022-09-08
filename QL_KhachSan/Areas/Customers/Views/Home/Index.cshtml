@@ -1,0 +1,88 @@
+﻿@model QL_KhachSan.ModelDbs.Customer
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Customer.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">Thông tin cá nhân</h3>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            Họ tên
+                        </th>
+                        <th>
+                            Số điện thoại
+                        </th>
+                        <th>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Giới tính
+                        </th>
+                        <th>
+                            Ngày sinh
+                        </th>
+                        <th>
+                            Số tài khoản ngân hàng
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr-shadow">
+                                <td>
+                                    @Html.DisplayFor(modelModel => Model.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelModel => Model.CustomerPhone)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelModel => Model.CustomerAddress)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelModel => Model.CustomerEmail)
+                                </td>
+                                <td>
+                                    @{
+                                        var temp = "";
+                                        if (Model.CustomerSex == true)
+                                            temp = "Nam";
+                                        else
+                                            temp = "Nữ";
+                                    }
+                                    @temp
+                                </td>
+                                <td>
+                                    @{
+                                        var temp1 = "";
+                                        if (Model.CustomerDateofbirth == null)
+                                        {
+                                            temp1 = "Chưa cập nhật";
+                                        }
+                                        else
+                                            temp1 = Model.CustomerDateofbirth.ToString().Substring(0,10);
+                                    }
+                                    @temp1
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelModel => Model.CustomerBankaccount)
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" href="/Customers/Customers/Edit/@Model.CustomerId">Edit</a>
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                </tbody>
+            </table>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model QL_KhachSan.ModelDbs.Hotel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Hotel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HotelName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HotelName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HotelAvt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HotelAvt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Point)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Point.PointId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ward)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ward.ProvinceId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.HotelId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

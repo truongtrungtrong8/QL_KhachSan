@@ -1,0 +1,93 @@
+﻿@model QL_KhachSan.ModelDbs.Owner
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Owner</h4>
+<hr />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="container w-75 border-success">
+    <div class="container col w-50">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OwnerId" />
+            <div class="form-group">
+                <label asp-for="OwnerName" class="control-label">Họ tên</label>
+                <input asp-for="OwnerName" class="form-control" required />
+                <span asp-validation-for="OwnerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerPhone" class="control-label">Số điện thoại</label>
+                <input asp-for="OwnerPhone" class="form-control" value="@Context.Session.GetString("Own_Phone")" readonly style="background-color:white"/>
+                <span asp-validation-for="OwnerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden>
+                <label asp-for="AccountUsername" class="control-label">Tên đăng nhập</label>
+                <input asp-for="AccountUsername" class="form-control" value="@Context.Session.GetString("Own_Phone")" readonly />
+                <span asp-validation-for="AccountUsername" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerAddress" class="control-label">Địa chỉ</label>
+                <input asp-for="OwnerAddress" class="form-control" />
+                <span asp-validation-for="OwnerAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerEmail" class="control-label">Email</label>
+                <input asp-for="OwnerEmail" class="form-control" type="email" required />
+                <span asp-validation-for="OwnerEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerSex" class="control-label">Giới tính</label>
+                <input asp-for="OwnerSex" class="form-control" id="OwnerssSex" hidden/>
+                <fieldset id="OwnerSex">
+                    <input type="radio" id="Male" name="OwnerSex" value="True" onchange="SetSex()"> Nam<br />
+                    <input type="radio" id="Female" name="OwnerSex" value="False" onchange="SetSex()"> Nữ<br />
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            if (document.getElementById("OwnerssSex").value == "True") {
+                                document.getElementById("Male").checked = true;
+                            }
+                            else
+                                document.getElementById("FeMale").checked = true;
+                        });
+                        
+                    </script>
+                </fieldset>
+                <script type="text/javascript">
+                    function SetSex() {
+                        if (document.getElementById("Male").checked == true) {
+                            document.getElementById("OwnerssSex").value = document.getElementById("Male").value;
+                        }
+                        else {
+                            document.getElementById("OwnerssSex").value = document.getElementById("Female").value;
+                        }
+                    }
+                </script>
+
+                <span asp-validation-for="OwnerSex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerDateofbirth" class="control-label">Ngày sinh</label>
+                <input asp-for="OwnerDateofbirth" class="form-control" type="date" />
+                <span asp-validation-for="OwnerDateofbirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OwnerBankaccount" class="control-label">Số tài khoản ngân hàng</label>
+                <input asp-for="OwnerBankaccount" class="form-control" required />
+                <span asp-validation-for="OwnerBankaccount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" asp-route="Owner" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

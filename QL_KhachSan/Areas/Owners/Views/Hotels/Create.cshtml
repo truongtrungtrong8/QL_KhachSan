@@ -1,0 +1,98 @@
+﻿@model QL_KhachSan.ModelDbs.Hotel
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Owner_Temp.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/LoadData.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" href="~/leaflet/css/leaflet.css"> 
+    <link rel="stylesheet" href="~/leaflet/css/leaflet.draw.css"> <!--liên kết css của leaflet-->
+	<script src="~/leaflet/js/leaflet.js"></script>	
+    <script src="~/leaflet/js/leaflet.draw.js"></script>	<!--liên kết js của leaflet-->
+	<script src="~/lib/jquery/dist/jquery.js"></script>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+function chooseFile(fileInput) {
+    if (fileInput.files && fileInput.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#image').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+
+}
+</script>
+
+
+<h1>Thêm mới khách sạn của bạn</h1>
+
+<hr />
+<div class="container w-75 border table-bordered">
+    <div class="container col w-50">
+        <form asp-action="Create" enctype="multipart/form-data" asp-antiforgery="true" method="post" asp-area="Owners" asp-controller="Hotels">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ProvinceId" class="control-label">Tỉnh thành phố</label>
+                <select class="form-control" id="ProvinceIdd"></select>
+                <input asp-for="ProvinceId" id="ProvinceId"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistrictId" class="control-label">Quận huyện</label>
+                <select class="form-control" id="DistrictIdd"></select>
+                <input asp-for="DistrictId" id="DistrictId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="WardId" class="control-label">Phường xã</label>
+                <select class="form-control" id="WardIdd"></select>
+                <input asp-for="WardId" id="WardId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PointId" class="control-label">Thêm vị trí khách sạn của bạn: </label>
+                
+                <input asp-for="PointId" class="form-control" hidden/>
+
+                <input type="button" class="btn btn-primary" value="Chọn" onclick="openPopup()">
+               <strong class="control-label" id="ThongBao"></strong>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HotelName" class="control-label">Tên khách sạn của bạn</label>
+                <input asp-for="HotelName" class="form-control" />
+                <span asp-validation-for="HotelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelAvt" class="control-label">Thêm ảnh minh hoạ</label>
+                <img src="~/images/MacDinh.jpg" alt="" id="image" width="200" height="200" />
+                <input type="file" name="img" onchange="chooseFile(this)" accept="image/gif, image/jpeg, image/png"/><br />
+                <span asp-validation-for="HotelAvt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+ <script>
+let windowObjectReference;
+let windowFeatures = "left=500,top=100,width=600,height=600";
+
+function openPopup() {
+  windowObjectReference = window.open("/Owners/Hotels/Popup", "mozillaWindow", windowFeatures);
+    document.getElementById("ThongBao").innerHTML = "Đã thêm vị trí";
+}
+
+ </script>
+
+

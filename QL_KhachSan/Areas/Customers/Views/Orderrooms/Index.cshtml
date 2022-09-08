@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QL_KhachSan.ModelDbs.Orderroom>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Customer.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên khách sạn
+            </th>
+            <th>
+                Tên phòng
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Thời gian
+            </th>
+            <th>
+                Chỉ đường
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Hotel.HotelName
+            </td>
+            <td>
+                @item.Room.RoomName
+            </td>
+            <td>
+                @Html.FormatValue(item.OrderPrice, "{0:#,###}") VNĐ
+            </td>
+            <td>
+                @item.OrderDate.ToString().Substring(0,item.OrderDate.ToString().IndexOf(" "))
+            </td>
+            <td>
+                <a target="_blank" href="/Customers/Customers/Routing?X=@item.Hotel.Point.PointX&Y=@item.Hotel.Point.PointY">
+                    <i class="fa fa-location-arrow"></i>  
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

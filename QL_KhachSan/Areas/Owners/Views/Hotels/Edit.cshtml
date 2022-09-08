@@ -1,0 +1,57 @@
+﻿@model QL_KhachSan.ModelDbs.Hotel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Hotel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="HotelId" />
+            <div class="form-group">
+                <label asp-for="ProvinceId" class="control-label"></label>
+                <select asp-for="ProvinceId" class="form-control" asp-items="ViewBag.ProvinceId"></select>
+                <span asp-validation-for="ProvinceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistrictId" class="control-label"></label>
+                <select asp-for="DistrictId" class="form-control" asp-items="ViewBag.DistrictId"></select>
+                <span asp-validation-for="DistrictId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WardId" class="control-label"></label>
+                <select asp-for="WardId" class="form-control" asp-items="ViewBag.WardId"></select>
+                <span asp-validation-for="WardId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PointId" class="control-label"></label>
+                <select asp-for="PointId" class="form-control" asp-items="ViewBag.PointId"></select>
+                <span asp-validation-for="PointId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelName" class="control-label"></label>
+                <input asp-for="HotelName" class="form-control" />
+                <span asp-validation-for="HotelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelAvt" class="control-label"></label>
+                <input asp-for="HotelAvt" class="form-control" />
+                <span asp-validation-for="HotelAvt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

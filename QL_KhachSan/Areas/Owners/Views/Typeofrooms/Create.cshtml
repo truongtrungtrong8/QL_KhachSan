@@ -1,0 +1,39 @@
+﻿@model QL_KhachSan.ModelDbs.Typeofroom
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Thêm mới loại phòng</h1>
+
+<hr />
+<div class="container w-75 border table-bordered">
+    <div class="container col w-50">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="OwnerId" class="control-label"></label>
+                <input asp-for="OwnerId" class ="form-control" asp-items="ViewBag.OwnerId" value="@Context.Session.GetString("Own_ID")"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorName" class="control-label">Tên loại phòng</label>
+                <input asp-for="TorName" class="form-control" />
+                <span asp-validation-for="TorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TorPrice" class="control-label">Giá</label>
+                <input asp-for="TorPrice" class="form-control" />
+                <span asp-validation-for="TorPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

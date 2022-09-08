@@ -1,0 +1,80 @@
+﻿@model QL_KhachSan.ModelDbs.Businessregistration
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+@*<br />
+<br />
+<br />
+<br />
+<h1 style="text-align:center">Đăng ký đăng tin Khách sạn</h1>
+<div class="container w-75 border table-bordered">
+    <div class="container col w-50">*@
+
+      
+        <div class="card w-75 container">
+            <div class="card-header">
+                <strong><h1 style="text-align:center">Đăng ký đăng tin Khách sạn</h1></strong>
+            </div>
+                <div class="card-body card-block">
+                    <form asp-action="Create" asp-area="Owners" asp-controller="Businessregistrations" class="form-horizontal">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-2">
+                                 <label asp-for="HotelId" class="control-label">Khách sạn đăng ký</label>
+                            </div>
+                            <div class="col-12 col-md-5">
+                                <select asp-for="HotelId" class="form-control" asp-items="ViewBag.HotelId"></select>
+                                <span asp-validation-for="HotelId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col col-md-2">
+                                 <label asp-for="PricelistId" class="control-label">Hình thức đăng ký</label>
+                            </div>
+                            <div class="col-12 col-md-5">
+                                <select asp-for="PricelistId" class="form-control" asp-items="ViewBag.PricelistId"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" hidden>
+                            <label asp-for="OwnerId" class="control-label"></label>
+                            <input asp-for="OwnerId" class="form-control" value="@Context.Session.GetString("Own_ID")" />
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="BrStatus" class="control-label"></label>
+                            <input asp-for="BrStatus" class="form-control" value="false" />
+                            <span asp-validation-for="BrStatus" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="BrDate" class="control-label"></label>
+                            <input asp-for="BrDate" class="form-control" />
+                            <span asp-validation-for="BrDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="Create" class="btn btn-primary" asp-route="Owners" id="btnCreate" hidden></button>
+                        </div>
+                     </form>
+            <input type="submit" value="Đăng ký" class="btn btn-primary" onclick="Noti()" />
+            <script type="text/javascript">
+            function Noti() {
+                if (confirm("Bạn có chắc chắn muốn đăng ký không?\n" + "Sau khi đăng ký sẽ không thể hoàn tiền!"))
+                    document.getElementById("btnCreate").click();
+
+            }
+        </script>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

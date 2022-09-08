@@ -1,0 +1,149 @@
+﻿@model IEnumerable<QL_KhachSan.ModelDbs.Owner>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35" style="text-align:center">Danh sách Khách hàng đã đăng ký tài khoản</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <select class="js-select2" name="property">
+                        <option selected="selected">All Properties</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <div class="rs-select2--light rs-select2--sm">
+                    <select class="js-select2" name="time">
+                        <option selected="selected">Today</option>
+                        <option value="">3 Days</option>
+                        <option value="">1 Week</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <button class="au-btn-filter">
+                    <i class="zmdi zmdi-filter-list"></i>filters
+                </button>
+            </div>
+            <div class="table-data__tool-right">
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Excel</option>
+                        <option value="">Xuất Excel</option>
+                        <option value="">Nhập Excel</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </th>
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            Tên
+                        </th>
+                        <th>
+                            Địa chỉ
+                        </th>
+                        <th>
+                            SĐT
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Ngày sinh
+                        </th>
+                        <th>
+                            Giới tính
+                        </th>
+                        <th>
+                            Số tài khoản
+                        </th>
+                        <th>
+                            Số lượng khách sạn
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var (item, index) in Model.Select((v, i) => (v, i)))
+                    {
+                        <tr class="tr-shadow">
+                            <td>
+                                <label class="au-checkbox">
+                                    <input type="checkbox">
+                                    <span class="au-checkmark"></span>
+                                </label>
+                            </td>
+                            <td>
+                                @{ int temp1 = index + 1;}
+                                @temp1
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OwnerName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OwnerAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountUsername)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OwnerEmail)
+                            </td>
+                            <td>
+                                @item.OwnerDateofbirth.ToString().Substring(0, 10)
+                            </td>
+
+                            <td>
+                                @{
+                                    var temp = "";
+                                    if (item.OwnerSex == true)
+                                        temp = "Nam";
+                                    else
+                                        temp = "Nữ";
+                                }
+                                @temp
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OwnerBankaccount)
+                            </td>
+                            <td id="count_@index">
+                                <script type="text/javascript">
+                                    $.getJSON("/Admin/Owners/CountHotels?idOwner=" + @item.OwnerId, function (response) {
+                                        if (response > 0) {
+                                            const textnode = document.createTextNode(response);
+                                            document.getElementById("count_@index").appendChild(textnode);
+                                        }
+                                        else {
+                                            const textnode = document.createTextNode("Chưa có");
+                                            document.getElementById("count_@index").appendChild(textnode);
+                                        }
+                                    })
+                                </script>
+                            </td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

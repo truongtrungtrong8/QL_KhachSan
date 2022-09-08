@@ -1,0 +1,48 @@
+﻿@model IEnumerable<QL_KhachSan.ModelDbs.Typeofroom>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Typeofrooms" asp-area="Owners">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TorPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TorPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.OwnerId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

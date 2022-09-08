@@ -1,0 +1,118 @@
+﻿@model IEnumerable<QL_KhachSan.ModelDbs.Businessregistration>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Owner.cshtml";
+}
+@*
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">Đăng ký kinh doanh</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+                    <div class="rs-select2--light rs-select2--md">
+                        <select class="js-select2" name="property">
+                            <option selected="selected">All Properties</option>
+                            <option value="">Option 1</option>
+                            <option value="">Option 2</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                    <div class="rs-select2--light rs-select2--sm">
+                        <select class="js-select2" name="time">
+                            <option selected="selected">Today</option>
+                            <option value="">3 Days</option>
+                            <option value="">1 Week</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                    <button class="au-btn-filter">
+                        <i class="zmdi zmdi-filter-list"></i>filters
+                    </button>
+                </div>
+                <div class="table-data__tool-right">
+                    <a asp-action="Create" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>Thêm dữ liệu
+                    </a>
+                    <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                        <select class="js-select2" name="type">
+                            <option selected="selected">Excel</option>
+                            <option value="">Xuất Excel</option>
+                            <option value="">Nhập Excel</option>
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </th>
+                        <th>
+                            Tên khách sạn đăng ký
+                        </th>
+                        <th>
+                            Hình thức đăng ký
+                        </th>
+                        <th>
+                            Ngày đăng ký
+                        </th>
+                        <th>
+                            Trạng thái
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.BrStatus == false)
+                        {
+                            <tr class="tr-shadow">
+                                <td>
+                                    <label class="au-checkbox">
+                                        <input type="checkbox">
+                                        <span class="au-checkmark"></span>
+                                     </label>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hotel.HotelName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pricelist.PricelistId)
+                                </td>
+                                <td>
+                                    @item.BrDate
+                                </td>
+                                <td>
+                                    @{
+                                        var temp = "";
+                                        if (item.BrStatus == false)
+                                        {
+                                            temp = "Chưa được duyệt";
+                                        }
+                                        else
+                                            temp = "Đã được duyệt";
+                                    }
+                                    @temp
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            </div>
+    </div>
+</div>

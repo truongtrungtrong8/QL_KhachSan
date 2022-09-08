@@ -1,0 +1,287 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> Reserving Kind - XYZ Lodges </title>
+	<meta charset="utf-8">
+	<meta identify="viewport" material="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="~/book/smart-forms.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	   
+    <script kind="textual content/javascript" src="~/book/jquery-1.9.1.min.js"></script>
+    <script kind="textual content/javascript" src="~/book/jquery-ui-custom.min.js"></script>
+    <script kind="textual content/javascript" src="~/book/jquery.validate.min.js"></script>
+    <script kind="textual content/javascript" src="~/book/additional-methods.min.js"></script>
+  </head>
+
+      <div id="exampleModal" class="modal fade" tabindex="-1">
+                    <div class="modal-dialog" style="width:650px">
+                        <div class="modal-content">
+                            @*<div class="modal-header">
+                                <h5 class="modal-title">Modal Title</h5>
+                                
+                            </div>*@
+                            <div class="modal-body">
+                                 <div class="smart-wrap">
+                                <div class="smart-forms smart-container wrap-2">
+     
+                                  <div class="form-header header-primary">
+                                    <h4><i class="fa fa-calendar"></i>Xác nhận thông tin đặt phòng</h4>
+                                  </div>
+                                    
+                                  <form method="post" asp-action="AddOrderRoom" asp-controller="Home" id="booking-form">
+                                    <div class="form-body">
+         
+                                     <!-- OUR FORM ELEMENTS WILL GO HERE -->                                               
+                                     <div class="section">
+                                      <label for="guestname" class="field-label">Họ tên người đặt phòng</label>
+                                      <label for="guestname" class="field prepend-icon">
+                                        <input type="text" name="guestname" id="guestname" class="gui-input" required="" placeholder="Võ Văn Nhân">
+                                        <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                      </label>
+                                    </div>
+                       
+                                    <div class="frm-row">
+                                      <div class="section colm colm6">
+                                        <label for="guestemail" class="field-label">Địa chỉ Email</label>
+                                        <label for="guestemail" class="field prepend-icon">
+                                          <input type="email" name="guestemail" id="guestemail" class="gui-input" required="" placeholder="vovannhan@gmail.com">
+                                          <span class="field-icon"><i class="fa fa-envelope"></i></span>  
+                                        </label>
+                                      </div>
+           
+                                      <div class="section colm colm6">
+                                        <label for="guestelephone" class="field-label">Số điện thoại</label>
+                                        <label for="guestelephone" class="field prepend-icon">
+                                          <input type="text" name="guestelephone" id="guestelephone" class="gui-input" required="" placeholder="Di động / Điện thoại bàn">
+                                          <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                        </label>
+                                      </div>
+                                    </div>
+         
+@*                                    <div class="frm-row">
+                                      <div class="section colm colm6">
+                                        <label for="adults" class="field-label">Số người lớn</label>
+                                        <label for="adults" class="field prepend-icon">
+                                          <input type="number" id="adults" name="adults" class="gui-input" required="" placeholder="1-2-3-4">
+                                          <span class="field-icon"><i class="fa fa-users"></i></span>  
+                                        </label>
+                                      </div>
+           
+                                      <div class="section colm colm6">
+                                        <label for="children" class="field-label">Số trẻ em</label>
+                                        <label for="children" class="field prepend-icon">
+                                          <input type="number" id="children" name="children" class="gui-input" required="" placeholder="1-2-3-4">
+                                          <span class="field-icon"><i class="fa fa-users"></i></span>  
+                                        </label>
+                                      </div>
+                                    </div>*@
+         
+                                    <div class="frm-row">
+                                      <div class="section colm colm6">
+                                        <label for="checkin" class="field-label">Ngày nhận phòng</label>
+                                        <label for="checkin" class="field prepend-icon">
+                                          <input type="text" id="checkin" name="dateStart" class="gui-input" required="" placeholder="mm/dd/yyyy">
+                                          <span class="field-icon"><i class="fa fa-calendar"></i></span>  
+                                        </label>
+                                      </div>
+           
+                                      <div class="section colm colm6">
+                                        <label for="checkout" class="field-label">Ngày trả phòng</label>
+                                        <label for="checkout" class="field prepend-icon">
+                                          <input type="text" id="checkout" name="dateEnd" class="gui-input" required="" placeholder="mm/dd/yyyy">
+                                          <span class="field-icon"><i class="fa fa-calendar"></i></span>  
+                                        </label>
+                                      </div>
+                                    </div>
+         
+                                    @*<div class="spacer-t20 spacer-b30">
+                                      <div class="tagline"><span>Vui lòng trả lời câu hỏi ?</span></div>
+                                    </div>
+         
+                                    <div class="frm-row">
+                                      <div class="option-group field">
+           
+                                        <div class="section colm colm6">
+                                          <label class="switch">
+                                            <input type="checkbox" name="switch1" id="switch1" value="switch1">
+                                            <span class="switch-label" data-on="Có" data-off="Không"></span>
+                                            <span>Bạn có mang theo thú cưng không ?</span>
+                                          </label>
+                                        </div>
+                 
+                                        <div class="section colm colm6">
+                                          <label class="switch">
+                                            <input type="checkbox" name="switch2" id="switch2" value="switch2">
+                                            <span class="switch-label" data-on="Có" data-off="Không"></span>
+                                            <span>Bạn có cần chúng tôi đón bạn không ?</span>
+                                          </label>
+                                        </div>
+                       
+                                      </div>
+                                    </div>*@
+                                    </div>
+                                    <input id="roomid" name="roomId" hidden/> 
+                                    <input type="submit" class="button btn-primary" id="btnsubmit" hidden/>
+                                  </form>
+                                    <div class="form-footer">
+                                        <script>
+                                            document.getElementById("btnsubmit").style.display = "none"
+                                            function AddOR(){
+                                                alert("Đặt phòng thành công");
+                                                document.getElementById("btnsubmit").click();
+                                            }
+                                        </script>
+                                        <input type="submit" class="button btn-primary" onclick="AddOR()" value="Xác nhận đặt phòng"/>
+                                      <input type="reset" class="button" value="Trở về"/>
+                                      
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                    </div>
+      </div>
+
+
+
+
+ 
+	<!-- OUR BOOKING FORM MARKUP -->
+ 
+
+
+</html>
+
+<script type="text/javascript">
+ jQuery(document).ready(function($){
+
+     $("#booking-form").validate({
+                                              
+         errorClass: "state-error",
+         validClass: "state-success",
+         errorElement: "em",
+         onkeyup: false,
+         onclick: false,                     
+         rules: {
+                 guestname: {
+                     required: true,
+                     minlength: 3
+                 },      
+                 guestemail: {
+                     required: true,
+                     email: true
+                 },
+                 guestphone: {
+                     required: true
+                 },
+                 adults: {
+                     required: true,
+                     number: true
+                 },                              
+                 children: {
+                     required: true,
+                     number: true
+                 },
+                 checkin:{
+                     required:true  
+                 },
+                 checkout:{
+                     required:true  
+                 },
+                 captcha:{
+                     required:true,
+                     remote:'php/captcha/process.php'
+                 }                               
+         },
+         messages:{
+                 guestname: {
+                         required: 'Please enter your name.',
+                         minlength: 'Name must be at least 2 characters.'
+                 },              
+                 guestemail: {
+                         required: 'Please enter your email address.',
+                         email: 'Please enter a valid email address.'
+                 },
+                 adults: {
+                         required: 'Please enter the number of adult guests.',
+                         number: 'Please enter a valid number.'
+                 },                                                      
+                 children: {
+                         required: 'Confirm the number of child guests.',
+                         number: 'Please enter a valid number.'
+                 },  
+                 checkin:{
+                         required: 'Please select a checkin date.'
+                 },
+                 checkout:{
+                         required:'Please select a checkout date.'
+                 },
+                                                
+         },
+         highlight: function(element, errorClass, validClass) {
+                 $(element).closest('.field').addClass(errorClass).removeClass(validClass);
+         },
+         unhighlight: function(element, errorClass, validClass) {
+                 $(element).closest('.field').removeClass(errorClass).addClass(validClass);
+         },
+         errorPlacement: function(error, element) {
+             if (element.is(":radio") || element.is(":checkbox")) {
+                     element.closest('.option-group').after(error);
+             } else {
+                     error.insertAfter(element.parent());
+             }
+         },              
+         submitHandler:function(form) {
+             $(form).ajaxSubmit({
+                     target:'.result',              
+                     beforeSubmit:function(){
+                             swapButton();
+                             $('.form-footer').addClass('progress');
+                     },
+                     error:function(){
+                             swapButton();
+                             $('.form-footer').removeClass('progress');
+                     },
+                         success:function(){
+                             swapButton();
+                             $('.form-footer').removeClass('progress');
+                             $('.alert-success').show().delay(7000).fadeOut();
+                             $('.field').removeClass("state-error, state-success");
+                             if( $('.alert-error').length == 0){
+                                 $('#booking-form').resetForm();
+                                 reloadCaptcha();
+                             }
+                         }
+                 });
+         }
+          
+     }); 
+
+     $("#checkin").datepicker({
+         defaultDate: "+w",
+         changeMonth: false,
+         numberOfMonths: 1,
+         minDate: new Date(),
+         prevText: '<i class="fa fa-chevron-left"></i>',
+         nextText: '<i class="fa fa-chevron-right"></i>',
+         onClose: function( selectedDate ) {
+             $( "#checkout" ).datepicker( "option", "minDate", selectedDate );
+         }
+     });
+       
+     $("#checkout").datepicker({
+         defaultDate: "+w",
+         changeMonth: false,
+         numberOfMonths: 1,
+         prevText: '<i class="fa fa-chevron-left"></i>',
+         nextText: '<i class="fa fa-chevron-right"></i>',            
+         onClose: function( selectedDate ) {
+             $( "#checkin" ).datepicker( "option", "maxDate", selectedDate );
+         }
+     });
+ });
+
+
+    
+  </script>
